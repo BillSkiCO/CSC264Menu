@@ -431,9 +431,9 @@ public class Util
     * Author         : William Golembieski modified from org.apache.commons.lang3.StringUtils.wrap
     * Date           :
     * Course/Section :
-    * Program Description: This method will wrap a string by inserting a user defined newline string
+    * Program Description: This method will wrap a string at a user defined numebr of chracters
     *
-    *    Example use wrap(x, 20,"\n",false," ");
+    *    Example use wrap(x, 20);
     **********************************************************/
    public static String wrap(String string, int lineLength)
    {
