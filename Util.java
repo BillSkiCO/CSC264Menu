@@ -1,6 +1,9 @@
+
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
+
 public class Util
 {
-
    /**********************************************************
     * Method Name    : setLeft
     * Author         : Prof Scheemaker
@@ -421,6 +424,85 @@ public class Util
       System.out.print("\n\n\n\n" + word + "\n\n\n");
 
    }// END closingMessage
+
+
+   /**********************************************************
+    * Method Name    : wrap
+    * Author         : William Golembieski modified from org.apache.commons.lang3.StringUtils.wrap
+    * Date           :
+    * Course/Section :
+    * Program Description: This method will wrap a string by inserting a user defined newline string
+    *
+    *    Example use wrap(x, 20,"\n",false," ");
+    **********************************************************/
+   public static String wrap(String string, int lineLength)
+   {
+      // Local constants
+   	  final String linebreak = "\n"; // or "\r\n";
+      final String spaces    = "               ";
+
+      // Local variables
+      StringBuilder b = new StringBuilder();
+
+      /*****************************************************/
+
+      // For all the lines
+      for (String line : string.split(Pattern.quote(linebreak)))
+      {
+        b.append(spaces);
+        b.append(wrapLine(line, lineLength));
+    }
+    return b.toString();
+}
+
+private static String wrapLine(String line, int lineLength)
+{
+    // Local constants
+	final String linebreak = "\n"; // or "\r\n";
+    final String spaces    = "               ";
+
+    // Local variables
+    String[] words = line.split(" ");
+    StringBuilder allLines = new StringBuilder();
+    StringBuilder trimmedLine = new StringBuilder();
+
+    /*****************************************************/
+
+    if (line.length() == 0)
+    {
+        return linebreak;
+    }
+
+    if (line.length() <= lineLength)
+    {
+        return line + linebreak + spaces;
+    }
+
+    for (String word : words)
+    {
+        if (trimmedLine.length() + 1 + word.length() <= lineLength)
+        {
+            trimmedLine.append(word).append(" ");
+        }
+
+        else
+        {
+            allLines.append(trimmedLine).append(linebreak + spaces);
+            trimmedLine = new StringBuilder();
+            trimmedLine.append(word).append(" ");
+        }
+
+    }
+
+    if (trimmedLine.length() > 0)
+    {
+        allLines.append(trimmedLine);
+    }
+
+    allLines.append(linebreak + spaces);
+
+    return allLines.toString();
+}
 
    /*
    OOOQOQOQOOQQQQQQQQQMQMQMQMQMQMQMQMQQMMQMQQQOOII6O6|^. |OQQMQMQMQMQMQQMMQMQMQMQMQMQMQMQMQMQQQMQMQMQMQMQMQQ
